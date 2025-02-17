@@ -44,6 +44,10 @@ jobs:
     - name: SSH into EC2 and run Docker container
       run: |
         ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_PUBLIC_IP }}
+        sudo usermod -aG docker ubuntu
+        newgrp docker
+        docker ps
+        docker run -d -p 80:80 arunagri03/ng:${{ github.run_id }}
         
           
           
